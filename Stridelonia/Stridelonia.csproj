@@ -14,6 +14,10 @@
 
     <PackageReference Include="Stride.Core.Assets.CompilerApp" Version="4.0.0.1-beta04-1317" PrivateAssets="contentfiles;analyzers" IncludeAssets="build" />
 
+    <PackageReference Include="Stride.Input" Version="4.0.0.1-beta04-1317" />
+
     <PackageReference Include="Stride.Physics" Version="4.0.0.1-beta04-1317" />
+
+    <PackageReference Include="Stride.UI" Version="4.0.0.1-beta04-1317" />
   </ItemGroup>
 </Project>

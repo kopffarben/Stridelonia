@@ -1,0 +1,6 @@
+﻿- See how to init Avalonia:
+Possible Solution :
+ - RenderFeature Empty
+ - Single Script in Scene
+
+- Add Mouse event to UI Element

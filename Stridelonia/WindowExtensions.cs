@@ -10,6 +10,7 @@ using Avalonia.Controls;
 using Avalonia.Data;
 using Stride.Core.Mathematics;
 using Stride.Rendering;
+using Stride.UI.Controls;
 
 namespace Stridelonia
 {
@@ -35,12 +36,12 @@ namespace Stridelonia
 
         internal static void Init()
         {
-            RenderGroupProperty.Changed.Subscribe(e => ((WindowImpl)((Window)e.Sender).PlatformImpl).RenderGroup = e.NewValue.Value);
-            ZIndexProperty.Changed.Subscribe(e => ((WindowImpl)((Window)e.Sender).PlatformImpl).ZIndex = e.NewValue.Value);
-            Is2DProperty.Changed.Subscribe(e => ((WindowImpl)((Window)e.Sender).PlatformImpl).Is2D = e.NewValue.Value);
-            HasInputProperty.Changed.Subscribe(e => ((WindowImpl)((Window)e.Sender).PlatformImpl).HasInput = e.NewValue.Value);
-            Position3DProperty.Changed.Subscribe(e => ((WindowImpl)((Window)e.Sender).PlatformImpl).Position3D = e.NewValue.Value);
-            Rotation3DProperty.Changed.Subscribe(e => ((WindowImpl)((Window)e.Sender).PlatformImpl).Rotation3D = e.NewValue.Value);
+            RenderGroupProperty.Changed.Subscribe(e => ((WindowElement)((Window)e.Sender).PlatformImpl).LinkedComponent.RenderGroup = e.NewValue.Value);
+            ZIndexProperty.Changed.Subscribe(e => ((WindowElement)((Window)e.Sender).PlatformImpl).Depth = e.NewValue.Value);
+            Is2DProperty.Changed.Subscribe(e => ((WindowElement)((Window)e.Sender).PlatformImpl).LinkedComponent.IsFullScreen = e.NewValue.Value);
+            HasInputProperty.Changed.Subscribe(e => ((WindowElement)((Window)e.Sender).PlatformImpl).CanBeHitByUser = e.NewValue.Value);
+            Position3DProperty.Changed.Subscribe(e => ((WindowElement)((Window)e.Sender).PlatformImpl).LinkedComponent.Entity.Transform.Position = e.NewValue.Value.GetValueOrDefault());
+            Rotation3DProperty.Changed.Subscribe(e => ((WindowElement)((Window)e.Sender).PlatformImpl).LinkedComponent.Entity.Transform.Rotation = e.NewValue.Value.GetValueOrDefault());
         }
 
         public static void SetRenderGroup(Window window, RenderGroup value) => window.SetValue(RenderGroupProperty, value);

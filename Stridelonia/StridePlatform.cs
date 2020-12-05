@@ -10,6 +10,7 @@ using Avalonia.Platform;
 using Avalonia.Rendering;
 using Stride.Engine;
 using Stride.Games;
+using Stride.UI.Controls;
 using Stridelonia.Implementation;
 
 namespace Avalonia
@@ -76,7 +77,9 @@ namespace Stridelonia
                 var scene = game.Services.GetService<SceneSystem>().SceneInstance.RootScene;
 
                 var entity = new Entity();
-                entity.Add(new AvaloniaComponent { Window = window });
+                UIComponent component = new UIComponent();
+                component.Page = new UIPage { RootElement = (WindowElement)window.PlatformImpl };
+                entity.Add(component);
                 scene.Entities.Add(entity);
 
                 WindowExtensions.SetStrideInited(window, true);
@@ -88,6 +91,6 @@ namespace Stridelonia
             throw new NotSupportedException();
         }
 
-        public IWindowImpl CreateWindow() => new WindowImpl();
+        public IWindowImpl CreateWindow() => new WindowElement();
     }
 }

@@ -16,7 +16,7 @@ namespace Avalonia
 {
     public static class StrideApplicationExtensions
     {
-        public static AppBuilder UseStride(this AppBuilder builder)
+        public static StrideBuilder UseStride(this StrideBuilder builder)
             => builder.UseWindowingSubsystem(() => Stridelonia.StridePlatform.Initialize(), "Stride");
     }
 
@@ -26,7 +26,7 @@ namespace Avalonia
         public bool UseDeferredRendering { get; set; } = true;
         public bool DrawFps { get; set; }
         public Type ApplicationType { get; set; }
-        public Action<AppBuilder> ConfigureApp { get; set; }
+        public Action<StrideBuilder> ConfigureApp { get; set; }
     }
 }
 
@@ -75,8 +75,10 @@ namespace Stridelonia
                 var game = AvaloniaLocator.Current.GetService<IGame>();
                 var scene = game.Services.GetService<SceneSystem>().SceneInstance.RootScene;
 
-                var entity = new Entity();
-                entity.Add(new AvaloniaComponent { Window = window });
+                var entity = new Entity
+                {
+                    new AvaloniaComponent { Window = window }
+                };
                 scene.Entities.Add(entity);
 
                 WindowExtensions.SetStrideInited(window, true);

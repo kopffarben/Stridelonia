@@ -158,9 +158,9 @@ namespace Stridelonia
             }
             else
             {
-                var builderType = typeof(AppBuilderBase<>).MakeGenericType(typeof(AppBuilder));
-                var configureMethod = builderType.GetMethod(nameof(AppBuilder.Configure), BindingFlags.Public | BindingFlags.Static, null, new Type[0], null);
-                var builder = (AppBuilder)configureMethod.MakeGenericMethod(Options.ApplicationType).Invoke(null, new object[0]);
+                var builderType = typeof(AppBuilderBase<>).MakeGenericType(typeof(StrideBuilder));
+                var configureMethod = builderType.GetMethod(nameof(StrideBuilder.Configure), BindingFlags.Public | BindingFlags.Static, null, new Type[0], null);
+                var builder = (StrideBuilder)configureMethod.MakeGenericMethod(Options.ApplicationType).Invoke(null, new object[0]);
 
                 builder
                     .UseStride()
@@ -181,9 +181,9 @@ namespace Stridelonia
         {
             var options = (StridePlatformOptions)parameter;
 
-            var builderType = typeof(AppBuilderBase<>).MakeGenericType(typeof(AppBuilder));
-            var configureMethod = builderType.GetMethod(nameof(AppBuilder.Configure), BindingFlags.Public | BindingFlags.Static, null, new Type[0], null);
-            var builder = (AppBuilder)configureMethod.MakeGenericMethod(options.ApplicationType).Invoke(null, new object[0]);
+            var builderType = typeof(AppBuilderBase<>).MakeGenericType(typeof(StrideBuilder));
+            var configureMethod = builderType.GetMethod(nameof(StrideBuilder.Configure), BindingFlags.Public | BindingFlags.Static, null, new Type[0], null);
+            var builder = (StrideBuilder)configureMethod.MakeGenericMethod(options.ApplicationType).Invoke(null, new object[0]);
 
             builder
                 .UseStride()
